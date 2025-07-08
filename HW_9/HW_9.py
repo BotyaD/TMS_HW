@@ -2,27 +2,27 @@ import csv
 
 import json
 
+"""
+ 1, 2, 3
+"""
+
 #1 Определить количество городов в файле
 
 with open("city_list.json", "r", encoding="utf-8") as f:
     city_list = json.load(f)
-    for i, line in enumerate(city_list):
-        print(i,line["name"])
+    total_city = len(city_list)
+    print(f"Количество городов равна: {total_city}")
 
 
-#2 Создать словарь де ключем является код страны, а значением города
 
-cordinate_country_list = []
+#2 Создать словарь где ключем является код страны, а значением города
+
+cordinate_country_list = {}
 with open("city_list.json", "r", encoding="utf-8") as f:
     city_list = json.load(f)
-    for city in city_list:
-        print(f'ID страны       Города')
-        cordinate_country_list = [
-            {
-                city["id"]: city["name"]
-            }
-        ]
-        print(cordinate_country_list)
+    city_dict = {value["id"]: value["name"] for value in city_list}
+    print(city_dict)
+
 
 
 
@@ -32,17 +32,17 @@ with open("city_list.json", "r", encoding="utf-8") as f:
 
 with open("city_list.json", "r", encoding="utf-8") as file:
     city_list = json.load(file)
-    north_hem = 0
-    south_hem = 0
-    for city in city_list:
-        if city["coord"]["lat"] < 0:
-            north_hem += 1
+north_hem = 0
+south_hem = 0
+for city in city_list:
+  if city["coord"]["lat"] < 0:
+      north_hem += 1
 
-        elif city["coord"]["lat"] > 0:
-            south_hem += 1
+  elif city["coord"]["lat"] > 0:
+      south_hem += 1
 
-    print(f"Количество городов в северном полушарии: {north_hem}")
-    print(f"Количество городов в южном полушарии: {south_hem}")
+print(f"Количество городов в северном полушарии: {north_hem}")
+print(f"Количество городов в южном полушарии: {south_hem}")
 
 
 #4 Перевести в CSV файл данные по городам (кординаты представить
@@ -69,4 +69,4 @@ with open("city_list.json", "r", encoding="utf-8") as f:
 ve_country = [city for city in city_list if city.get("country") == "VE"]
 
 with open("one_city.json", "w", encoding="utf-8") as f:
-    json.dump(ve_country, f)
+   json.dump(ve_country, f)
