@@ -7,6 +7,7 @@ create table users(
     email varchar(30) null
 );
 
+
 create table orders(
 	id int unsigned primary key auto_increment,
     user_id int unsigned not null,
@@ -26,6 +27,7 @@ create table products(
 
     foreign  key (seller_id) references seller (id)
 );
+
 
 create table seller(
 	id int unsigned primary key auto_increment,
