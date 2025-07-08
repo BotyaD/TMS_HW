@@ -11,32 +11,23 @@ from functools import total_ordering
 
 
 @total_ordering
-class RealString:
-    def __init__(self, string):
-        self.string = str(string)
-
-    def __len__(self):
-        return len(self.string)
-
+class RealString(str):
     def __eq__(self, other):
-        if isinstance(other, RealString):
-            return len(self.string) == len(other.string)
-        if isinstance(other, str):
-            return len(self.string) == len(other)
-        raise TypeError(f"Невозможно сравнить ")
+        if not isinstance(other, (str, RealString)):
+            raise TypeError("Невозможно сравнить c числом")
+        return len(self) == len(other)
 
-    def __lt__(self, other):
-        if isinstance(other, RealString):
-            return len(self.string) < len(other.string)
-        if isinstance(other, str):
-            return len(self.string) < len(other)
-        raise TypeError(f"Невозможно сравнить ")
+    def __gt__(self, other):
+        if not isinstance(other, (str, RealString)):
+            raise TypeError("Невозможно сравнить c числом")
+        return len(self) > len(other)
 
 
-ru = RealString("Яблоко")
-en = RealString("Apple")
 
-print(en < ru)
-print(en <= ru)
-print(ru <= en)
-#print(ru == 123456)
+apple = RealString("Apple")
+apple1 = RealString("Яблоко")
+hello = "hello"
+
+print(apple == apple1)
+print(apple1 < apple)
+#print(apple > 123)
