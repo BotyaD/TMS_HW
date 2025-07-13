@@ -17,11 +17,20 @@ with open("city_list.json", "r", encoding="utf-8") as f:
 
 #2 Создать словарь где ключем является код страны, а значением города
 
-cordinate_country_list = {}
 with open("city_list.json", "r", encoding="utf-8") as f:
     city_list = json.load(f)
-    city_dict = {value["id"]: value["name"] for value in city_list}
+    city_dict = {}
+    for city in city_list:
+        value_key = city["country"]
+        value_city = city["name"]
+        if value_key not in city_dict:
+            city_dict[value_key] = []
+
+        city_dict[value_key].append(value_city)
     print(city_dict)
+
+
+
 
 
 
